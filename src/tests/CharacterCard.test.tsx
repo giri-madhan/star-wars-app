@@ -15,7 +15,7 @@ const mockCharacter = {
   films: ["A New Hope", "The Empire Strikes Back"],
 };
 
-describe("CharacterCard Component", () => {
+describe("CharacterDetails Component", () => {
   test("renders CharacterDetails and displays character information", async () => {
     (fetchCharacterDetails as jest.Mock).mockResolvedValue(mockCharacter);
 
@@ -31,15 +31,16 @@ describe("CharacterCard Component", () => {
       expect(screen.getByText("Luke Skywalker")).toBeInTheDocument();
     });
 
-    expect(screen.getByText("Hair Color:")).toBeInTheDocument();
+    // Adjusted expectations
+    expect(screen.getByText("Hair Color")).toBeInTheDocument();
     expect(screen.getByText("blond")).toBeInTheDocument();
-    expect(screen.getByText("Eye Color:")).toBeInTheDocument();
+    expect(screen.getByText("Eye Color")).toBeInTheDocument();
     expect(screen.getByText("blue")).toBeInTheDocument();
-    expect(screen.getByText("Gender:")).toBeInTheDocument();
+    expect(screen.getByText("Gender")).toBeInTheDocument();
     expect(screen.getByText("male")).toBeInTheDocument();
-    expect(screen.getByText("Homeworld:")).toBeInTheDocument();
+    expect(screen.getByText("Homeworld")).toBeInTheDocument();
     expect(screen.getByText("Tatooine")).toBeInTheDocument();
     expect(screen.getByText("A New Hope")).toBeInTheDocument();
     expect(screen.getByText("The Empire Strikes Back")).toBeInTheDocument();
-});
+  });
 });

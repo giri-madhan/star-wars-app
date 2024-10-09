@@ -33,13 +33,13 @@ describe("CharacterDetails Component", () => {
       ).toBeInTheDocument();
     });
 
-    expect(screen.getByText("Hair Color:")).toBeInTheDocument();
+    expect(screen.getByText("Hair Color")).toBeInTheDocument();
     expect(screen.getByText("blond")).toBeInTheDocument();
-    expect(screen.getByText("Eye Color:")).toBeInTheDocument();
+    expect(screen.getByText("Eye Color")).toBeInTheDocument();
     expect(screen.getByText("blue")).toBeInTheDocument();
-    expect(screen.getByText("Gender:")).toBeInTheDocument();
+    expect(screen.getByText("Gender")).toBeInTheDocument();
     expect(screen.getByText("male")).toBeInTheDocument();
-    expect(screen.getByText("Homeworld:")).toBeInTheDocument();
+    expect(screen.getByText("Homeworld")).toBeInTheDocument();
     expect(screen.getByText("Tatooine")).toBeInTheDocument();
     expect(screen.getByText("A New Hope")).toBeInTheDocument();
     expect(screen.getByText("The Empire Strikes Back")).toBeInTheDocument();
@@ -59,10 +59,35 @@ describe("CharacterDetails Component", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByRole("alert")).toHaveTextContent(
-        "Failed to load character details."
-      );
+      expect(
+        screen.getByText(
+          "Failed to load character details. Please try again later."
+        )
+      ).toBeInTheDocument();
     });
-});
-});
 
+    expect(
+      screen.getByRole("button", { name: /go back/i })
+    ).toBeInTheDocument();
+  });
+
+  test("displays 'Character not found' when character does not exist", async () => {
+    (fetchCharacterDetails as jest.Mock).mockResolvedValue(null); // Mock the fetch to return null
+
+    render(
+      <MemoryRouter initialEntries={["/character/1"]}>
+        <Routes>
+          <Route path="/character/:id" element={<CharacterDetails />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText("Character not found")).toBeInTheDocument();
+    });
+
+    expect(
+      screen.getByRole("button", { name: /go back/i })
+    ).toBeInTheDocument();
+  });
+});
