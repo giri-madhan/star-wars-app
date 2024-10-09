@@ -30,8 +30,7 @@ describe("CharacterList Component", () => {
       </Router>
     );
 
-    // Check loading state
-    expect(screen.getByRole("status")).toBeInTheDocument(); // If you've added role to loading spinner
+    expect(screen.getByRole("status")).toBeInTheDocument();
     await waitFor(() => {
       expect(screen.getByText("Luke Skywalker")).toBeInTheDocument();
     });
@@ -41,14 +40,14 @@ describe("CharacterList Component", () => {
   });
 
   test("displays loading spinner initially", () => {
-    (fetchCharacters as jest.Mock).mockReturnValue(new Promise(() => {})); // Keeps the promise pending
+    (fetchCharacters as jest.Mock).mockReturnValue(new Promise(() => {}));
     render(
       <Router>
         <CharacterList />
       </Router>
     );
 
-    expect(screen.getByRole("status")).toBeInTheDocument(); // Check for loading spinner
+    expect(screen.getByRole("status")).toBeInTheDocument();
   });
 
   test("displays error message on failed fetch", async () => {

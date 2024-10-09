@@ -71,7 +71,7 @@ describe("CharacterDetails Component", () => {
   });
 
   test("displays 'Character not found' when character does not exist", async () => {
-    (fetchCharacterDetails as jest.Mock).mockResolvedValue(null); // Mock the fetch to return null
+    (fetchCharacterDetails as jest.Mock).mockResolvedValue(null);
 
     render(
       <MemoryRouter initialEntries={["/character/1"]}>

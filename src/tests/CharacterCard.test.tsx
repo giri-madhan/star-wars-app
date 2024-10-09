@@ -30,7 +30,6 @@ describe("CharacterDetails Component", () => {
       expect(screen.getByText("Luke Skywalker")).toBeInTheDocument();
     });
 
-    // Adjusted expectations
     expect(screen.getByText("Hair Color")).toBeInTheDocument();
     expect(screen.getByText("blond")).toBeInTheDocument();
     expect(screen.getByText("Eye Color")).toBeInTheDocument();

@@ -18,7 +18,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
   return (
     <RouterLink
       to={`/character/${id}`}
-      className="relative block bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 w-full h-full sm:w-auto sm:h-auto" // Added w-full h-full for mobile
+      className="relative block bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 w-full h-full sm:w-auto sm:h-auto"
     >
       <img
         src={placeholderImage}
