@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/star-wars-app/static/css/main.7c8d2ed7.css",
-    "main.js": "/star-wars-app/static/js/main.239accf9.js",
-    "index.html": "/star-wars-app/index.html",
-    "main.7c8d2ed7.css.map": "/star-wars-app/static/css/main.7c8d2ed7.css.map",
-    "main.239accf9.js.map": "/star-wars-app/static/js/main.239accf9.js.map"
+    "main.css": "https://giri-madhan.github.io/star-wars-app/static/css/main.7c8d2ed7.css",
+    "main.js": "https://giri-madhan.github.io/star-wars-app/static/js/main.90b951cc.js",
+    "index.html": "https://giri-madhan.github.io/star-wars-app/index.html",
+    "main.7c8d2ed7.css.map": "https://giri-madhan.github.io/star-wars-app/static/css/main.7c8d2ed7.css.map",
+    "main.90b951cc.js.map": "https://giri-madhan.github.io/star-wars-app/static/js/main.90b951cc.js.map"
   },
   "entrypoints": [
     "static/css/main.7c8d2ed7.css",
-    "static/js/main.239accf9.js"
+    "static/js/main.90b951cc.js"
   ]
 }
