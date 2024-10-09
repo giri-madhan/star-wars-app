@@ -1,6 +1,4 @@
-import { Box, Image, Heading, Text } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
-import React from "react";
 
 interface CharacterCardProps {
   name: string;
@@ -18,41 +16,28 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
   const placeholderImage = `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`;
 
   return (
-    <Box
-      as={RouterLink}
+    <RouterLink
       to={`/character/${id}`}
-      bg="gray.700"
-      borderRadius="lg"
-      overflow="hidden"
-      shadow="lg"
-      _hover={{
-        transform: "scale(1.05)",
-        transition: "transform 0.2s ease-in-out",
-        shadow: "2xl",
-      }}
-      transition="transform 0.2s ease-in-out"
-      textDecoration="none"
+      className="relative block bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105"
     >
-      <Image
+      <img
         src={placeholderImage}
         alt={name}
-        objectFit="cover"
-        borderRadius="lg"
-        width="100%"
-        transition="0.3s"
+        className="w-full h-64 object-cover"
+        onError={(e) => {
+          (e.target as HTMLImageElement).src =
+            "https://starwars-visualguide.com/assets/img/placeholder.jpg";
+        }}
       />
-      <Box p={4} textAlign="center" bg="gray.900">
-        <Heading size="md" color="yellow.300" mb={2}>
-          {name}
-        </Heading>
-        <Text fontSize="sm" color="gray.400">
-          {gender}
-        </Text>
-        <Text fontSize="sm" color="gray.400" mt={1}>
-          {homePlanet}
-        </Text>
-      </Box>
-    </Box>
+      <div className="p-4">
+        <h2 className="text-xl font-bold text-yellow-300 mb-1">{name}</h2>
+        <p className="text-sm text-gray-400 capitalize">{gender}</p>
+        <p className="text-sm text-gray-400">{homePlanet || "Unknown"}</p>
+      </div>
+      <div className="absolute inset-0 bg-yellow-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
+        <p className="text-gray-900 font-semibold">View Details</p>
+      </div>
+    </RouterLink>
   );
 };
 

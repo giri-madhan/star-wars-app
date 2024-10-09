@@ -2,24 +2,67 @@ import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import CharacterDetails from "../components/CharacterDetails";
+import { fetchCharacterDetails } from "../services/swapiService";
 
-test("renders CharacterDetails and displays character information", async () => {
-  render(
-    <MemoryRouter initialEntries={["/character/1"]}>
-      <Routes>
-        <Route path="/character/:id" element={<CharacterDetails />} />
-      </Routes>
-    </MemoryRouter>
-  );
+jest.mock("../services/swapiService");
 
-  await waitFor(() => {
-    expect(screen.getByText("Luke Skywalker")).toBeInTheDocument();
+const mockCharacter = {
+  name: "Luke Skywalker",
+  hair_color: "blond",
+  eye_color: "blue",
+  gender: "male",
+  homeworld: "Tatooine",
+  films: ["A New Hope", "The Empire Strikes Back"],
+};
+
+describe("CharacterDetails Component", () => {
+  test("renders CharacterDetails and displays character information", async () => {
+    (fetchCharacterDetails as jest.Mock).mockResolvedValue(mockCharacter);
+
+    render(
+      <MemoryRouter initialEntries={["/character/1"]}>
+        <Routes>
+          <Route path="/character/:id" element={<CharacterDetails />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    await waitFor(() => {
+      expect(
+        screen.getByRole("heading", { name: "Luke Skywalker" })
+      ).toBeInTheDocument();
+    });
+
+    expect(screen.getByText("Hair Color:")).toBeInTheDocument();
+    expect(screen.getByText("blond")).toBeInTheDocument();
+    expect(screen.getByText("Eye Color:")).toBeInTheDocument();
+    expect(screen.getByText("blue")).toBeInTheDocument();
+    expect(screen.getByText("Gender:")).toBeInTheDocument();
+    expect(screen.getByText("male")).toBeInTheDocument();
+    expect(screen.getByText("Homeworld:")).toBeInTheDocument();
+    expect(screen.getByText("Tatooine")).toBeInTheDocument();
+    expect(screen.getByText("A New Hope")).toBeInTheDocument();
+    expect(screen.getByText("The Empire Strikes Back")).toBeInTheDocument();
   });
 
-  expect(screen.getByText("Hair Color: blond")).toBeInTheDocument();
-  expect(screen.getByText("Eye Color: blue")).toBeInTheDocument();
-  expect(screen.getByText("Gender: male")).toBeInTheDocument();
-  expect(screen.getByText("Homeworld: Tatooine")).toBeInTheDocument();
-  expect(screen.getByText("A New Hope")).toBeInTheDocument();
-  expect(screen.getByText("The Empire Strikes Back")).toBeInTheDocument();
+  test("displays error message on failed fetch", async () => {
+    (fetchCharacterDetails as jest.Mock).mockRejectedValue(
+      new Error("Network error")
+    );
+
+    render(
+      <MemoryRouter initialEntries={["/character/1"]}>
+        <Routes>
+          <Route path="/character/:id" element={<CharacterDetails />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        "Failed to load character details."
+      );
+    });
 });
+});
+
