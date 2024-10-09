@@ -15,7 +15,7 @@ interface ApiResponse<T> {
   previous: string | null;
 }
 
-// Simple cache implementation
+// Cache
 const cache: { [key: string]: any } = {};
 
 const fetchData = async <T>(url: string): Promise<T> => {
