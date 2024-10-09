@@ -2,7 +2,7 @@
   "name": "star-wars-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://giri-madhan.github.io/star-wars-app",
+  "homepage": "https://giri-madhan.github.io/star-wars-app/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
