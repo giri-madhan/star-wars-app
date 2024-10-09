@@ -18,18 +18,18 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
   return (
     <RouterLink
       to={`/character/${id}`}
-      className="relative block bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105"
+      className="relative block bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 w-full h-full sm:w-auto sm:h-auto" // Added w-full h-full for mobile
     >
       <img
         src={placeholderImage}
         alt={name}
-        className="w-full h-64 object-cover"
+        className="w-full h-64 object-contain"
         onError={(e) => {
           (e.target as HTMLImageElement).src =
             "https://starwars-visualguide.com/assets/img/placeholder.jpg";
         }}
       />
-      <div className="p-4">
+      <div className="p-4 text-center">
         <h2 className="text-xl font-bold text-yellow-300 mb-1">{name}</h2>
         <p className="text-sm text-gray-400 capitalize">{gender}</p>
         <p className="text-sm text-gray-400">{homePlanet || "Unknown"}</p>
